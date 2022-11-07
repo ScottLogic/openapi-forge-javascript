@@ -5,7 +5,7 @@
   "scripts": {
     "prepare": "husky install",
     "test": "\"./node_modules/.bin/cucumber-js\" -p default",
-    "test:defaultPath": "\"./node_modules/.bin/cucumber-js\" -p default \"node_modules/openapi-forge/features/pathparams.feature\" \"openapi-forge/src/generate\"",
+    "test:defaultPath": "\"./node_modules/.bin/cucumber-js\" -p default \"node_modules/openapi-forge/features/*.feature\" \"openapi-forge/src/generate\"",
     "format:check:all": "prettier --check .",
     "format:write:all": "prettier --write .",
     "format:write": "prettier --write",
@@ -20,7 +20,7 @@
     "chai": "^4.3.6",
     "eslint": "^8.24.0",
     "husky": "^8.0.1",
-    "openapi-forge": "^1.0.1",
+    "openapi-forge": "latest",
     "prettier": "^2.7.1",
     "semantic-release": "^19.0.5"
   },
