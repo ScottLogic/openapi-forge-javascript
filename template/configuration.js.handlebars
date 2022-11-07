@@ -1,0 +1,32 @@
+const { RequestParameters } = require("./request");
+
+/**
+ * Configures the API
+ *
+ * When invoking API methods, the URL is constructed as follows:
+ * ```
+ * basePath + servers[selectedServerIndex] + path
+ * ```
+ */
+class Configuration {
+  /**
+   * An array of API endpoints.
+   */
+  servers = [{{#each servers}}"{{url}}",{{/each}}];
+  /**
+   * The index of the server / endpoint that will be used by default.
+   */
+  selectedServerIndex = 0;
+  /**
+   * The base path, which is prepended to the URL
+   */
+  basePath;
+  bearerToken;
+  transport;
+
+  constructor(transport) {
+    this.transport = transport;
+  }
+}
+
+module.exports = Configuration;

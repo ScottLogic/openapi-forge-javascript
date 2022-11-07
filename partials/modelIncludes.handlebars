@@ -1,0 +1,5 @@
+{{#if models}}
+const {
+  {{#each models}}{{@key}}, {{/each}}
+} = require("./model");
+{{/if}}

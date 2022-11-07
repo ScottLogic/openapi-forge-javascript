@@ -1,0 +1,15 @@
+export const Info = {
+  {{#each _info}}
+  {{@key}}: 
+  {{#if (isObj this) }}
+  {
+    {{#each this}}
+        {{@key}}: "{{this}}",
+    {{/each}}
+  },
+  {{else}}"{{this}}",
+  {{/if}}
+  {{/each}}
+};
+
+module.exports = Info;

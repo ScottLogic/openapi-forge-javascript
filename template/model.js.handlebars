@@ -1,0 +1,26 @@
+{{#each components.schemas}}
+{{> model}}
+{{/each}}
+
+{{#each components.inlineObjects}}
+{{> model}}
+{{/each}}
+
+const models = [
+  {{#each components.schemas}}
+  "{{@key}}", 
+  {{/each}}
+  {{#each components.inlineObjects}}
+  "{{@key}}", 
+  {{/each}}
+];
+
+module.exports = {
+  {{#each components.schemas}}
+  {{@key}}, 
+  {{/each}}
+  {{#each components.inlineObjects}}
+  {{@key}}, 
+  {{/each}}
+  models
+}

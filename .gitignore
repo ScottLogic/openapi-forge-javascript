@@ -1,0 +1,5 @@
+node_modules
+test/api
+other-examples
+.vscode/settings.json
+example

@@ -1,0 +1,55 @@
+const model = require("./model");
+
+// takes a JSON response and deserializes it into the required model objects / types
+function deserialize(json, type) {
+
+  // handle arrays
+  if (type.endsWith("[]")) {
+    const arrayType = type.substring(0, type.length - 2);
+    return json.map((item) => deserialize(item, arrayType));
+  }
+
+  // handle model objects
+  if (model.models.includes(type)) {
+    const modelObject = new model[type]();
+    const properties = model[type].propertyTypes;
+    for (const property of properties) {
+      if (json[property.name] !== undefined) {
+        modelObject[property.name] = deserialize(json[property.name], property.type);
+      }
+    }
+    return modelObject;
+  } 
+
+  // handle date types
+  if (type === "Date") {
+    return new Date(json);
+  }
+
+  // handle additional properties
+  const match = type.match(/\{ \[name: string\]: (.*) \}/);
+  if (match) {
+    const typeName = match[1];
+    const modelObject = {};
+    for (const key in json) {
+      modelObject[key] = deserialize(json[key], typeName);
+    }
+    return modelObject;
+  }
+  
+  return json;
+}
+
+function serialize(item, type) {
+  if (type.endsWith("[]")) {
+    const arrayType = type.substring(0, type.length - 2);
+    return item
+      .map((item) => serialize(item, arrayType))
+      .join(",");
+  }
+  return typeof item === "object" ? JSON.stringify(item) : item.toString();
+}
+
+module.exports = {
+  deserialize, serialize
+};

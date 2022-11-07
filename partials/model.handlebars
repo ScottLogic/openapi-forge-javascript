@@ -1,0 +1,23 @@
+{{#if description}}
+/**
+ * {{description}}
+ */
+{{/if}}
+class {{@key}} {
+
+  static propertyTypes =  [
+    {{#each properties}}
+      {
+        name: "{{@key}}",
+        type: "{{typeConvert this}}"
+      },
+    {{/each}}
+  ];
+
+  {{#each properties}}
+    {{#if description}}
+    // {{description}}
+    {{/if}}
+    {{@key}};
+  {{/each}}
+}

@@ -1,0 +1,24 @@
+# {{info.title}} JavaScript Client Library
+
+This is an auto-generated client library for the {{info.title}} API, via the `openapi-forge-javascript` template.
+
+## Usage example 
+{{#each paths}}{{#with get}}{{#unless @root.apiMethod}}{{setVar "apiMethod" this}}{{/unless}}{{/with}}{{/each}}
+{{#each components.schemas}}{{#unless @root.modelObject}}{{setVar "modelObject" @key}}{{/unless}}{{/each}}
+```
+import Api from "./api";
+import Configuration from "./configuration";
+// import any model types you need
+import { {{modelObject}} } from "./api/model";
+
+const config = new Configuration();
+// set the base path for your endpoint
+config.basePath = "https://example.com";
+// set any environment specific configuration here
+const api = new Api(config);
+
+api.{{apiMethod.operationId}}(...).then((data) => {
+   // log the result
+   console.log(data);
+});
+```
