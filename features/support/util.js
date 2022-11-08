@@ -27,7 +27,7 @@ async function generateApi(schema) {
 }
 
 let mock = {
-  serverResponse: undefined
+  serverResponse: undefined,
 };
 
 function createApi(serverIndex = 0) {
@@ -48,5 +48,5 @@ module.exports = {
   isJson,
   generateApi,
   createApi,
-  mock
+  mock,
 };

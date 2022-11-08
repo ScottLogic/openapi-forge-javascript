@@ -47,7 +47,7 @@ class ParameterBuilder {
       // array handling depends on location
       if (location === "path") {
         // path parameters are comma separated
-        const csv = value.map(v => serialize(v, itemType)).join(",");
+        const csv = value.map((v) => serialize(v, itemType)).join(",");
         this.parameters.push({
           name,
           value: csv,

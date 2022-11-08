@@ -77,13 +77,16 @@ When(/extracting the object at index ([0-9]*)/, (index) => {
   apiResponse = apiResponse[parseInt(index)];
 });
 
-When(/calling the( spied)? method ([a-zA-Z]*) without params/, async (foo, methodName) => {
-  if (!api[methodName]) {
-    console.error(`Method ${methodName} not found`);
-  }
+When(
+  /calling the( spied)? method ([a-zA-Z]*) without params/,
+  async (foo, methodName) => {
+    if (!api[methodName]) {
+      console.error(`Method ${methodName} not found`);
+    }
 
-  await api[methodName]();
-});
+    await api[methodName]();
+  }
+);
 
 When("selecting the server at index {int}", (index) => {
   api = createApi(index);
@@ -151,6 +154,7 @@ Then(/it should generate a model object named (\w*)/, (modelName) => {
 
 Then(
   /(\w*) should have (an optional|a required) property named (\w*) of type (\w*)/,
+  // eslint-disable-next-line no-unused-vars
   (modelName, _, propertyName, __) => {
     const models = require("../api/model.js");
     assert.isDefined(
