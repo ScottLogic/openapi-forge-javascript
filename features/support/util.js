@@ -31,17 +31,21 @@ let mock = {
 };
 
 function createApi(serverIndex = 0) {
-  const Api = require("../api/api.js");
-  const Configuration = require("../api/configuration.js");
-  const mockTransport = async (params) => {
-    mock.requestParams = params;
-    return mock.serverResponseObject;
-  };
+  try {
+    const Api = require("../api/api.js");
+    const Configuration = require("../api/configuration.js");
+    const mockTransport = async (params) => {
+      mock.requestParams = params;
+      return mock.serverResponseObject;
+    };
 
-  const config = new Configuration(mockTransport);
-  config.selectedServerIndex = serverIndex;
+    const config = new Configuration(mockTransport);
+    config.selectedServerIndex = serverIndex;
 
-  return new Api(config);
+    return new Api(config);
+  } catch {
+    return null;
+  }
 }
 
 module.exports = {

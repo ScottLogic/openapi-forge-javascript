@@ -16,11 +16,6 @@ Using default values:
 npm run test:defaultPaths
 ```
 
-This method uses:
-
-- `featurePath` - `node_modules/openapi-forge/features/*.feature`
-- `generatorPath` - `openapi-forge/src/generate`
-
 The second script requires values for the featurePath & generatePath:
 
 ```

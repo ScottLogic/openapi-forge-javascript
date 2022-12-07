@@ -11,7 +11,9 @@ const { deserialize, serialize } = require("./serializer");
 Version: {{info.version}}
 */
 
-class Api {
+{{#if _tag.description}}// {{_tag.description}}{{/if}}
+
+class Api{{_tag.name}} {
 
   constructor(config) {
     this.config = config;
@@ -20,40 +22,42 @@ class Api {
   {{#each paths}}
   {{setVar "path" @key}}
   {{#each this}}
+    {{#ifEquals ../../_tag.name _tag.name}}
     
-    {{#if summary}}// {{summary}}{{/if}}
-    {{#if description}}// {{description}}{{/if}}
-    {{#each _sortedParameters}}
-      // @param {{name}} {{description}}
-    {{/each}}
-    async {{operationId}}(
+      {{#if summary}}// {{summary}}{{/if}}
+      {{#if description}}// {{description}}{{/if}}
       {{#each _sortedParameters}}
-        {{name}}
-        {{#if schema.default}} = {{{quoteIfString schema.default}}}{{/if}},
+        // @param {{name}} {{description}}
       {{/each}}
-    ) {
+      async {{operationId}}(
+        {{#each _sortedParameters}}
+          {{name}}
+          {{#if schema.default}} = {{{quoteIfString schema.default}}}{{/if}},
+        {{/each}}
+      ) {
 
-      const builder = new ParameterBuilder();
-      {{#each _sortedParameters}}{{#unless _optional}}
-      builder.add("{{name}}", {{name}}, "{{typeConvert schema}}", "{{in}}");
-      {{/unless}}{{/each}}
-      
-      {{#each _sortedParameters}}{{#if _optional}}
-      if ({{name}}) {
+        const builder = new ParameterBuilder();
+        {{#each _sortedParameters}}{{#unless _optional}}
         builder.add("{{name}}", {{name}}, "{{typeConvert schema}}", "{{in}}");
-      }
-      {{/if}}{{/each}}
+        {{/unless}}{{/each}}
+        
+        {{#each _sortedParameters}}{{#if _optional}}
+        if ({{name}}) {
+          builder.add("{{name}}", {{name}}, "{{typeConvert schema}}", "{{in}}");
+        }
+        {{/if}}{{/each}}
 
-      const response = await request(this.config, "{{@root.path}}", "{{@key}}", builder.parameters);
-      {{#if _response.schema}}
-      return deserialize(response, "{{typeConvert _response.schema}}");
-      {{else}}
-      return null;
-      {{/if}}
-    };
+        const response = await request(this.config, "{{@root.path}}", "{{@key}}", builder.parameters);
+        {{#if _response.schema}}
+        return deserialize(response, "{{typeConvert _response.schema}}");
+        {{else}}
+        return null;
+        {{/if}}
+      };
 
+    {{/ifEquals}}
   {{/each}}  
   {{/each}}
 }
 
-module.exports = Api;
+module.exports = Api{{_tag.name}};

@@ -3,6 +3,10 @@ const { assert, expect } = require("chai");
 const { existsSync, rmSync } = require("fs");
 const { isJson, generateApi, createApi, mock } = require("./util.js");
 
+const getTagFileName = (tag) => {
+  return tag === "" ? "" : tag.charAt(0).toUpperCase() + tag.slice(1);
+};
+
 After(() => {
   // cache-bust the api that was loaded via CommonJS
   Object.keys(require.cache).forEach(function (key) {
@@ -170,5 +174,33 @@ Then(
 
     // note, for the purposes of this test, we're only checking the property name and type
     // JavaScript cannot enforce required/optional properties or types
+  }
+);
+
+Then(/the api file with tag "(.*)" exists/, (tag) => {
+  existsSync(`../api/api${getTagFileName(tag)}.js`);
+});
+
+Then(/the api file with tag "(.*)" does not exist/, (tag) => {
+  !existsSync(`../api/api${getTagFileName(tag)}.js`);
+});
+
+Then(
+  /the method "(.*)" should be present in the api file with tag "(.*)"/,
+  (methodName, tag) => {
+    existsSync(`../api/api${getTagFileName(tag)}.js`);
+    const apiFile = require(`../api/api${getTagFileName(tag)}.js`);
+    const module = new apiFile();
+    expect(module[methodName]).to.exist;
+  }
+);
+
+Then(
+  /the method "(.*)" should not be present in the api file with tag "(.*)"/,
+  (methodName, tag) => {
+    existsSync(`../api/api${getTagFileName(tag)}.js`);
+    const apiFile = require(`../api/api${getTagFileName(tag)}.js`);
+    const module = new apiFile();
+    expect(module[methodName]).to.not.exist;
   }
 );
