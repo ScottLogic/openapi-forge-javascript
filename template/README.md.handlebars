@@ -5,17 +5,19 @@ This is an auto-generated client library for the {{info.title}} API, via the `op
 ## Usage example 
 {{#each paths}}{{#with get}}{{#unless @root.apiMethod}}{{setVar "apiMethod" this}}{{/unless}}{{/with}}{{/each}}
 {{#each components.schemas}}{{#unless @root.modelObject}}{{setVar "modelObject" @key}}{{/unless}}{{/each}}
+{{#each _tags}}{{#unless @root.tagName}}{{setVar "tagName" this.name}}{{/unless}}{{/each}}
 ```
-import Api from "./api";
-import Configuration from "./configuration";
+const Api{{tagName}} = require("./api{{tagName}}");
+const Configuration = require("./configuration");
+const transport = require("./nodeFetch");
 // import any model types you need
-import { {{modelObject}} } from "./api/model";
+const { {{modelObject}} } = require("./api/model");
 
-const config = new Configuration();
+const config = new Configuration(transport);
 // set the base path for your endpoint
 config.basePath = "https://example.com";
 // set any environment specific configuration here
-const api = new Api(config);
+const api = new Api{{tagName}}(config);
 
 api.{{apiMethod.operationId}}(...).then((data) => {
    // log the result
