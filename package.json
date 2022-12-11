@@ -8,7 +8,7 @@
   "scripts": {
     "prepare": "husky install",
     "test": "\"./node_modules/.bin/cucumber-js\" -p default",
-    "test:defaultPaths": "\"./node_modules/.bin/cucumber-js\" -p default \"../openapi-forge/features/*.feature\" \"../../../openapi-forge/src/generate\"",
+    "test:generators": "\"./node_modules/.bin/cucumber-js\" -p generators",
     "format:check:all": "prettier --check .",
     "format:write:all": "prettier --write .",
     "format:write": "prettier --write",
@@ -20,6 +20,7 @@
     "@commitlint/cli": "^17.1.2",
     "@commitlint/config-conventional": "^17.1.0",
     "@cucumber/cucumber": "^8.7.0",
+    "@cucumber/messages": "^20.0.0",
     "chai": "^4.3.6",
     "eslint": "^8.24.0",
     "husky": "^8.0.1",
