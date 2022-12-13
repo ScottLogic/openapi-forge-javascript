@@ -8,19 +8,13 @@ https://github.com/ScottLogic/openapi-forge
 
 ### Testing
 
-There are two scripts that can be used for testing, one that uses preset values for file paths to feature files and the `generate.js` file of the forge:
-
-Using default values:
+The standard test script is used to execute the BDD-style tests against this generator.
 
 ```
-npm run test:defaultPaths
+npm run test
 ```
 
-The second script requires values for the featurePath & generatePath:
-
-```
-npm test {featurePath} {generatorPath}
-```
+The script expects that the openapi-forge project (which is where the BDD feature files are located) is checked out at the same folder-level as this project.
 
 ### Linting
 

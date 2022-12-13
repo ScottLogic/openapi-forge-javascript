@@ -1,3 +1,5 @@
+const generate = require("../../../openapi-forge/src/generate");
+
 const isJson = (str) => {
   try {
     JSON.parse(str);
@@ -6,16 +8,6 @@ const isJson = (str) => {
   }
   return true;
 };
-
-// Retrieve the path to generate.js from cl arguments of cucumber-js
-const cliArgs = process.argv.slice(2);
-const generatePath = cliArgs[cliArgs.length - 1];
-
-if (!generatePath) {
-  throw new Error(`You must provide a path to generate.js.`);
-}
-
-const generate = require(generatePath);
 
 async function generateApi(schema) {
   await generate(JSON.parse(schema), ".", {
