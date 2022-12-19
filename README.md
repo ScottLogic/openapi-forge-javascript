@@ -10,12 +10,12 @@ https://github.com/ScottLogic/openapi-forge
 
 To run this generator, you also need to have [OpenAPI Forge] installed, or the repository checked out. Assuming you have it installed as a global module, you can run this generator as follows:
 
-~~~
+```
 $ openapi-forge forge
  \ https://petstore3.swagger.io/api/v3/openapi.json
  \ .
  \ -o api
-~~~
+```
 
 This generates an API from the Pet Store swagger definition, using the generator within the current folder (`.`), outputting the results to the `api` folder.
 
