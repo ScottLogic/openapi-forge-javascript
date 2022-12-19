@@ -14,5 +14,5 @@ const logLevels = [
 ];
 
 module.exports = (folder, logLevel) => {
-  cli.run(["--write", folder, "--loglevel", logLevels[logLevel]]);
+  return cli.run(["--write", folder, "--loglevel", logLevels[logLevel]]);
 };
