@@ -1,8 +1,11 @@
-{{#if description}}
 /**
- * {{description}}
+ * {{@key}}
+ {{#if description}}* {{description}}{{/if~}}
+ *
+ {{#each properties}}
+ * @param { {{~typeConvert this~}} } {{#if _required}}{{@key}}{{else}}[{{@key}}]{{/if}} {{#if description}} - {{description}}{{/if}}
+ {{/each}}
  */
-{{/if}}
 class {{@key}} {
 
   static propertyTypes =  [
@@ -15,9 +18,6 @@ class {{@key}} {
   ];
 
   {{#each properties}}
-    {{#if description}}
-    // {{description}}
-    {{/if}}
     {{@key}};
   {{/each}}
 }
