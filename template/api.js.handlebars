@@ -5,14 +5,12 @@ const request = require("./request");
 const ParameterBuilder = require("./parameterBuilder");
 const { deserialize, serialize } = require("./serializer");
 
-/*
-{{_info.title}}
-{{info.description}}
-Version: {{info.version}}
-*/
-
-{{#if _tag.description}}// {{_tag.description}}{{/if}}
-
+/**
+ * {{_info.title}}
+ *
+{{#if info.description}}{{docComment info.description}}{{/if}}
+{{#if info.version}} * @version {{info.version}}{{/if}}
+ */
 class Api{{_tag.name}} {
 
   constructor(config) {
@@ -24,11 +22,20 @@ class Api{{_tag.name}} {
   {{#each this}}
     {{#ifEquals ../../_tag.name _tag.name}}
     
-      {{#if summary}}// {{summary}}{{/if}}
-      {{#if description}}// {{description}}{{/if}}
+      /** 
+      {{#if summary}}
+       * {{summary}}
+       * 
+      {{/if}}
+      {{#if description}}
+       * {{description}}
+       *
+      {{/if}}
+      {{#if tags}} * @tags {{tags}}{{/if}}
       {{#each _sortedParameters}}
-        // @param {{name}} {{description}}
+       * @param { {{~typeConvert schema ../../../_options~}} } {{name}} {{description}}
       {{/each}}
+      */
       async {{operationId}}(
         {{#each _sortedParameters}}
           {{name}}
