@@ -12,17 +12,33 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out Git repository
-        uses: actions/checkout@v3 
-
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 16.x
+
+      - name: Check out Git repository
+        uses: actions/checkout@v3 
+        with: 
+          path: openapi-forge-javascript
        
       - name: Install Node.js dependencies
-        run: npm install
+        run: |
+          cd openapi-forge-javascript
+          npm install
 
-      - name: Test generator
-        run: npm run test:defaultPath
-        continue-on-error: true
+      - name: Check out the openapi-forge generator
+        uses: actions/checkout@v3
+        with: 
+          repository: ScottLogic/openapi-forge
+          path: openapi-forge
+
+      - name: Install openapi-forge dependencies
+        run: |
+          cd openapi-forge
+          npm install
+
+      - name: Run the tests
+        run: |
+          cd openapi-forge-javascript
+          npm test
