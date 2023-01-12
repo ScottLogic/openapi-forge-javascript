@@ -1,20 +1,74 @@
-## OpenAPI Forge - JavaScript
+# OpenAPI Forge - JavaScript
 
 This repository is the JavaScript generator for the [OpenAPI Forge](https://github.com/ScottLogic/openapi-forge), see that repository for usage instructions:
 
 https://github.com/ScottLogic/openapi-forge
 
+## Example
+
+You should consult the [OpenAPI Forge](https://github.com/ScottLogic/openapi-forge) repository for a complete user guide. The following is a very brief example that quikcly gets you up-and-running with this generator.
+
+Run the `forge` command to generate a client API using this generator as follows:
+
+```
+$ openapi-forge forge \
+                https://petstore3.swagger.io/api/v3/openapi.json \
+                openapi-forge-javascript \
+                -o api
+```
+
+This will generate various files in the `api` folder. The API depends on the node-fetch module, which provides Fetch API for node applications. To run this client you'll need to add that as a dependency:
+
+```
+% npm init -y --silent
+% npm i node-fetch@2.6.6
+```
+
+Finally, add the following `index.js` in the `api` folder:
+
+```javascript
+const ApiPet = require("./apiPet");
+const Configuration = require("./configuration");
+const transport = require("./nodeFetch");
+
+// create an API client
+const config = new Configuration(transport);
+config.basePath = "https://petstore3.swagger.io";
+const api = new ApiPet(config);
+
+// use it!
+(async () => {
+  await api.addPet({
+    id: 1,
+    name: "Fido",
+    photoUrls: [],
+  });
+
+  const pet = await api.getPetById(1);
+  console.log(pet.name);
+})();
+```
+
+To test the API, this example adds a Pet named “Fido” to the Pet Store, then retrieves it via its id, logging the name. You can run the example as follows:
+
+```
+% node index.js
+Fido
+```
+
 ## Development
+
+The OpenAPI Forge project [details the process for creating a new generator](https://github.com/ScottLogic/openapi-forge#generator-development). The documentation gives a few generator-specific instructions.
 
 ### Running
 
 To run this generator, you also need to have [OpenAPI Forge] installed, or the repository checked out. Assuming you have it installed as a global module, you can run this generator as follows:
 
 ```
-$ openapi-forge forge
- \ https://petstore3.swagger.io/api/v3/openapi.json
- \ .
- \ -o api
+$ openapi-forge forge \
+                https://petstore3.swagger.io/api/v3/openapi.json \
+                . \
+                -o api \
 ```
 
 This generates an API from the Pet Store swagger definition, using the generator within the current folder (`.`), outputting the results to the `api` folder.
