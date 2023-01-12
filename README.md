@@ -17,7 +17,14 @@ $ openapi-forge forge \
                 -o api
 ```
 
-Add the following `index.js` in the `api` folder:
+This will generate various files in the `api` folder. The API depends on the node-fetch module, which provides Fetch API for node applications. To run this client you'll need to add that as a dependency:
+
+```
+% npm init -y --silent
+% npm i node-fetch@2.6.6
+```
+
+Finally, add the following `index.js` in the `api` folder:
 
 ```javascript
 const ApiPet = require("./apiPet");
