@@ -1,5 +1,3 @@
-const fetch = require("node-fetch");
-
 async function transport(params) {
   const response = await fetch(params.url, params);
   if (response.status !== 200) {
