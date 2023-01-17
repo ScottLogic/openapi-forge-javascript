@@ -1,0 +1,6 @@
+{
+  "moduleFormat": {
+    "choices": ["cjs", "esm"],
+    "description": "The module format to use for the generated code."
+  }
+}

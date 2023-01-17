@@ -1,4 +1,4 @@
-const model = require("./model");
+{{{import "* as model" "model"}}};
 
 // takes a JSON response and deserializes it into the required model objects / types
 function deserialize(json, type) {
@@ -50,6 +50,6 @@ function serialize(item, type) {
   return typeof item === "object" ? JSON.stringify(item) : item.toString();
 }
 
-module.exports = {
+{{{export false}}} {
   deserialize, serialize
 };

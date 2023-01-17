@@ -1,5 +1,6 @@
 {{#if models }}
-const {
+{{#setVarBlock "imports"}}{
   {{#each models}}{{@key}}, {{/each}}
-} = require("./model");
+}{{/setVarBlock}}
+{{{import @root.imports "model"}}};
 {{/if}}

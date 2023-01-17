@@ -1,5 +1,5 @@
-const model = require("./model");
-const { serialize } = require("./serializer");
+{{{import "* as model" "model"}}};
+{{{import "{ serialize }" "serializer"}}};
 
 // builds the request parameters from the API method arguments, handling
 // serialisation and 'exploding' of object properties
@@ -74,4 +74,4 @@ class ParameterBuilder {
   }
 }
 
-module.exports = ParameterBuilder;
+{{{export}}} ParameterBuilder;

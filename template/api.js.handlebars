@@ -1,9 +1,10 @@
-const Configuration = require("./configuration");
+
 {{>modelIncludes models=components.schemas options=_options}}
 {{>modelIncludes models=components.inlineObjects options=_options}}
-const request = require("./request");
-const ParameterBuilder = require("./parameterBuilder");
-const { deserialize, serialize } = require("./serializer");
+{{{import "Configuration" "configuration"}}};
+{{{import "request" "request"}}};
+{{{import "ParameterBuilder" "parameterBuilder"}}};
+{{{import "{deserialize, serialize}" "serializer"}}};
 
 /**
  * {{_info.title}}
@@ -67,4 +68,4 @@ class Api{{_tag.name}} {
   {{/each}}
 }
 
-module.exports = Api{{_tag.name}};
+{{{export}}} Api{{_tag.name}};
