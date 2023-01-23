@@ -6,6 +6,16 @@ https://github.com/ScottLogic/openapi-forge
 
 The client API it generates is suitable for running in the browser (after being bundled appropriately), or via node. The generated code uses the Fetch API, and as a result you'll need to use node v18 or greater.
 
+- [OpenAPI Forge - JavaScript](#openapi-forge---javascript)
+  - [Example](#example)
+    - [Running with node (\>= v18)](#running-with-node--v18)
+    - [Running in the browser](#running-in-the-browser)
+  - [Configuration](#configuration)
+  - [Development](#development)
+    - [Running](#running)
+    - [Testing](#testing)
+    - [Linting](#linting)
+
 ## Example
 
 You should consult the [OpenAPI Forge](https://github.com/ScottLogic/openapi-forge) repository for a complete user guide. The following is a very brief example that quikcly gets you up-and-running with this generator.
@@ -72,6 +82,19 @@ Next create a simple HTML file that loads this script:
 ```
 
 Load the above page in a browser and you should see `Fido` logged to the console.
+
+## Configuration
+
+OpenAPI Forge is opinionated in its approach, we don't provide a vast range of configuration options, just the essentials! You can list the generator-specific configuration options by running the `generate-options` command as follows:
+
+```
+% openapi-forge generator-options openapi-forge-javascript
+This generator has a number of additional options which can be supplied when executing the 'forge' command.
+
+Options:
+  --generator.moduleFormat <value>  The module format to use for the generated code. (choices: "commonjs", "esmodule",
+                                    default: "commonjs")
+```
 
 ## Development
 
