@@ -1,8 +1,8 @@
 function exportHelper(isDefault = true) {
   switch (process.env.moduleFormat) {
-    case "esm":
+    case "esmodule":
       return `export ${isDefault ? "default " : ""}`;
-    case "cjs":
+    case "commonjs":
     default:
       return `module.exports = `;
   }

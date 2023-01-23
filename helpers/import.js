@@ -1,8 +1,8 @@
 function importHelper(type, file) {
   switch (process.env.moduleFormat) {
-    case "esm":
+    case "esmodule":
       return `import ${type} from "./${file}.js"`;
-    case "cjs":
+    case "commonjs":
     default: {
       if (type && type.startsWith("* as")) {
         type = type.replace("* as", "");
