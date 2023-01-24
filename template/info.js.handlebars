@@ -1,4 +1,4 @@
-export const Info = {
+const Info = {
   {{#each _info}}
   {{@key}}: 
   {{#if (isObj this) }}
@@ -12,4 +12,4 @@ export const Info = {
   {{/each}}
 };
 
-module.exports = Info;
+{{{export}}} Info;

@@ -1,0 +1,6 @@
+{
+  "moduleFormat": {
+    "choices": ["commonjs", "esmodule"],
+    "description": "The module format to use for the generated code."
+  }
+}
