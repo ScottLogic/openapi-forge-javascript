@@ -7,8 +7,8 @@
   ],
   "scripts": {
     "prepare": "husky install",
-    "test": "\"./node_modules/.bin/cucumber-js\" -p default",
-    "test:generators": "\"./node_modules/.bin/cucumber-js\" -p generators",
+    "test": "cross-env-shell ./node_modules/.bin/cucumber-js -p default",
+    "test:generators": "cross-env-shell ./node_modules/.bin/cucumber-js -p generators",
     "format:check:all": "prettier --check .",
     "format:write:all": "prettier --write .",
     "lint:check:all": "eslint .",
@@ -21,6 +21,7 @@
     "@cucumber/cucumber": "^8.7.0",
     "@cucumber/messages": "^20.0.0",
     "chai": "^4.3.6",
+    "cross-env": "^7.0.3",
     "eslint": "^8.24.0",
     "husky": "^8.0.1",
     "openapi-forge": "latest",
