@@ -7,8 +7,8 @@
   ],
   "scripts": {
     "prepare": "husky install",
-    "test": "\"./node_modules/.bin/cucumber-js\" -p default",
-    "test:generators": "\"./node_modules/.bin/cucumber-js\" -p generators",
+    "test": "cucumber-js -p default",
+    "test:generators": "cucumber-js -p generators",
     "format:check:all": "prettier --check .",
     "format:write:all": "prettier --write .",
     "lint:check:all": "eslint .",
