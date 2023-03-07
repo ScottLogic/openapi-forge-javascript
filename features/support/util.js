@@ -20,6 +20,7 @@ async function generateApi(schema) {
 
 let mock = {
   serverResponse: undefined,
+  serverResponseHeaders: undefined,
 };
 
 function createApi(serverIndex = 0) {
@@ -29,7 +30,8 @@ function createApi(serverIndex = 0) {
     const mockTransport = async (params) => {
       mock.requestParams = params;
       return {
-        data: mock.serverResponseObject
+        data: mock.serverResponseObject,
+        headers: mock.serverResponseHeaders,
       };
     };
 
