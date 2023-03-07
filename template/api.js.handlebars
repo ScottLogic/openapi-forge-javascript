@@ -57,9 +57,14 @@ class Api{{_tag.name}} {
 
         const response = await request(this.config, "{{@root.path}}", "{{@key}}", builder.parameters);
         {{#if _response.schema}}
-        return deserialize(response, "{{typeConvert _response.schema}}");
+        return {
+          ...response,
+          data: deserialize(response.data, "{{typeConvert _response.schema}}")
+        }
         {{else}}
-        return null;
+        return {
+          ...response
+        };
         {{/if}}
       };
 

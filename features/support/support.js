@@ -78,7 +78,7 @@ When(
 );
 
 When(/extracting the object at index ([0-9]*)/, (index) => {
-  apiResponse = apiResponse[parseInt(index)];
+  apiResponse.data = apiResponse.data[parseInt(index)];
 });
 
 When(
@@ -115,13 +115,13 @@ Then(
 );
 
 Then(/the response should be of type (.*)/, (type) => {
-  assert.equal(apiResponse.constructor.name, type);
+  assert.equal(apiResponse.data.constructor.name, type);
 });
 
 Then(
   /the response should have a property ([a-zA-Z]*) with value (.*)/,
   (propName, propValue) => {
-    const value = apiResponse[propName];
+    const value = apiResponse.data[propName];
     const formattedValue =
       value instanceof Date ? value.toISOString() : value.toString();
     assert.equal(formattedValue, propValue);
@@ -129,7 +129,7 @@ Then(
 );
 
 Then(/the response should be an array/, () => {
-  assert.isArray(apiResponse);
+  assert.isArray(apiResponse.data);
 });
 
 Then(/the requested URL should be (.*)/, (url) => {
@@ -141,11 +141,11 @@ Then(/the request should have a body with value (.*)/, (body) => {
 });
 
 Then(/the response should be equal to "(.*)"/, (value) => {
-  assert.equal(apiResponse, value);
+  assert.equal(apiResponse.data, value);
 });
 
 Then(/the response should be null/, () => {
-  assert.isNull(apiResponse);
+  assert.isNull(apiResponse.data);
 });
 
 Then(/it should generate a model object named (\w*)/, (modelName) => {

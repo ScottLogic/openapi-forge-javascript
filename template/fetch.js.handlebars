@@ -1,9 +1,19 @@
 async function transport(params) {
-  const response = await fetch(params.url, params);
-  if (response.status !== 200) {
-    throw new Error(`${response.status} ${response.statusText}`);
+  const fetchResponse = await fetch(params.url, params);
+
+  if (fetchResponse.ok) {
+    const json = await fetchResponse.json();
+    return {
+      data: json,
+      statusCode: fetchResponse.status,
+      headers: fetchResponse.headers,
+      type: fetchResponse.type,
+    };
+  } else {
+    throw new Error(
+      `Error ${fetchResponse.status}: ${fetchResponse.statusText}`
+    );
   }
-  return await response.json();
 }
 
 {{{export}}} transport;
