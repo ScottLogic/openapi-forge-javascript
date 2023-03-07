@@ -28,7 +28,9 @@ function createApi(serverIndex = 0) {
     const Configuration = require("../api/configuration.js");
     const mockTransport = async (params) => {
       mock.requestParams = params;
-      return mock.serverResponseObject;
+      return {
+        data: mock.serverResponseObject
+      };
     };
 
     const config = new Configuration(mockTransport);
