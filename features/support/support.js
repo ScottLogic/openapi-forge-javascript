@@ -62,7 +62,7 @@ When(
 );
 
 When(
-  /calling the method ([a-zA-Z]*) and the server responds with/,
+  /calling the method ([a-zA-Z]*) and the server responds with$/,
   async (methodName, response) => {
     mock.serverResponseObject = JSON.parse(response);
     apiResponse = await api[methodName]();
@@ -95,6 +95,22 @@ When(
 When("selecting the server at index {int}", (index) => {
   api = createApi(index);
 });
+
+When(
+  /calling the method ([a-zA-Z]*) and the server responds with headers$/,
+  async (methodName, headers) => {
+    mock.serverResponseObject = {};
+    mock.serverResponseHeaders = JSON.parse(headers);
+    apiResponse = await api[methodName]();
+  }
+);
+
+Then(
+  /the response should have a header (.*) with value (.*)/,
+  (prop, value) => {
+    assert.equal(apiResponse.headers[prop], value);
+  }
+);
 
 Then(/the request method should be of type (.*)/, (type) => {
   assert.equal(mock.requestParams.method, type);
