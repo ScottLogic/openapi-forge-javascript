@@ -138,9 +138,12 @@ Then(
   /the response should have a property ([a-zA-Z]*) with value (.*)/,
   (propName, propValue) => {
     const value = apiResponse.data[propName];
-    const formattedValue =
-      value instanceof Date ? value.toISOString() : value.toString();
-    assert.equal(formattedValue, propValue);
+    if (value instanceof Date) {
+      // JS/TS does not differentiate date/date-time. Need to construct prop date and compare.
+      assert.equal(value.toISOString(), new Date(propValue).toISOString());
+    } else {
+      assert.equal(value.toString(), propValue);
+    }
   }
 );
 
